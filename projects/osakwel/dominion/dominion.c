@@ -1290,9 +1290,9 @@ int ambassadorCardEffect(int choice1, int choice2, int handPos, struct gameState
     discardCard(handPos, currentPlayer, state, 0);
 
     //trash copies of cards returned to supply
-    for (j = 0; j < choice2; j++)
+    for (int j = 0; j < choice2; j++)
     {
-        for (i = 0; i < state->handCount[currentPlayer]; i++)
+        for (int i = 0; i < state->handCount[currentPlayer]; i++)
         {
             if (state->hand[currentPlayer][i] == state->hand[currentPlayer][choice1])
             {
@@ -1350,7 +1350,7 @@ int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer
         tributeRevealedCards[1] = -1;
     }
 
-    for (i = 0; i <= 2; i ++) {
+    for (int i = 0; i <= 2; i ++) {
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 2;
         }
