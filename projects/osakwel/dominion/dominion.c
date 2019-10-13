@@ -1280,14 +1280,14 @@ int ambassadorCardEffect(int choice1, int choice2, int handPos, struct gameState
     //each other player gains a copy of revealed card
     for (int i = 0; i < state->numPlayers; i++)
     {
-        if (i != currentPlayer)
+        if (i == currentPlayer)
         {
             gainCard(state->hand[currentPlayer][choice1], state, 0, i);
         }
     }
 
     //discard played card from hand
-    discardCard(handPos, currentPlayer, state, 0);
+    //discardCard(handPos, currentPlayer, state, 0);
 
     //trash copies of cards returned to supply
     for (int j = 0; j < choice2; j++)
@@ -1352,7 +1352,7 @@ int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer
 
     for (int i = 0; i <= 2; i ++) {
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
-            state->coins += 2;
+            state->coins += 50;
         }
 
         else if (tributeRevealedCards[i] == estate || tributeRevealedCards[i] == duchy || tributeRevealedCards[i] == province || tributeRevealedCards[i] == gardens || tributeRevealedCards[i] == great_hall) { //Victory Card Found
@@ -1360,7 +1360,7 @@ int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer
             drawCard(currentPlayer, state);
         }
         else { //Action Card
-            state->numActions = state->numActions + 2;
+            state->numActions = state->numActions + 20;
         }
     }
 
