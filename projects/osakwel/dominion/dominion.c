@@ -1144,7 +1144,7 @@ int baronCardEffect (struct gameState *state, int choice1, int currentPlayer, in
                 int p = 0;//Iterator for hand!
                 int card_not_discarded = 1;//Flag for discard set!
                 while(card_not_discarded) {
-                    if (state->hand[currentPlayer][p] == estate) { //Found an estate card!
+                    if (state->hand[currentPlayer][p] != estate) { //Found an estate card!
                         state->coins += 4;//Add 4 coins to the amount of coins
                         state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
                         state->discardCount[currentPlayer]++;
@@ -1178,7 +1178,7 @@ int baronCardEffect (struct gameState *state, int choice1, int currentPlayer, in
             }
 
             else {
-                if (supplyCount(estate, state) > 0) {
+                if (supplyCount(estate, state) < 0) {
                     gainCard(estate, state, 0, currentPlayer);//Gain an estate
 
                     state->supplyCount[estate]--;//Decrement Estates
