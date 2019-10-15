@@ -407,7 +407,7 @@ int isGameOver(struct gameState *state) {
 
     //if three supply pile are at 0, the game ends
     j = 0;
-    for (i = 0; i < 25; i++)
+    for (i = 0; i < treasure_map; i++)
     {
         if (state->supplyCount[i] == 0)
         {
@@ -806,6 +806,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         }
         //Reset Hand
 
+        discardCard(handPos, currentPlayer, state, 1);
+        
         return 0;
 
     case gardens:
@@ -925,7 +927,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                         discardCard(j, i, state, 0);
                         break;
                     }
-                    if (j == state->handCount[i])
+                    if (j == state->handCount[i] - 1)
                     {
                         for (k = 0; k < state->handCount[i]; k++)
                         {
@@ -993,7 +995,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
                 state->discard[i][state->discardCount[i]] = state->deck[i][state->deckCount[i]--];
                 state->deckCount[i]--;
                 state->discardCount[i]++;
-                state->deck[i][state->deckCount[i]--] = curse;//Top card now a curse
+                state->deck[i][state->deckCount[i]] = curse;//Top card now a curse
             }
         }
         return 0;
@@ -1148,7 +1150,7 @@ int baronCardEffect (struct gameState *state, int choice1, int currentPlayer, in
                         state->coins += 4;//Add 4 coins to the amount of coins
                         state->discard[currentPlayer][state->discardCount[currentPlayer]] = state->hand[currentPlayer][p];
                         state->discardCount[currentPlayer]++;
-                        for (; p < state->handCount[currentPlayer]; p++) {
+                        for (; p < state->handCount[currentPlayer] - 1; p++) {
                             state->hand[currentPlayer][p] = state->hand[currentPlayer][p+1];
                         }
                         state->hand[currentPlayer][state->handCount[currentPlayer]] = -1;
@@ -1261,7 +1263,7 @@ int ambassadorCardEffect(int choice1, int choice2, int handPos, struct gameState
 
     for (int i = 0; i < state->handCount[currentPlayer]; i++)
     {
-        if (i != handPos && i == state->hand[currentPlayer][choice1] && i != choice1)
+        if (i != handPos && state->hand[currentPlayer][i] == state->hand[currentPlayer][choice1] && i != choice1)
         {
             j++;
         }
@@ -1350,7 +1352,7 @@ int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer
         tributeRevealedCards[1] = -1;
     }
 
-    for (int i = 0; i <= 2; i ++) {
+    for (int i = 0; i < 2; i ++) {
         if (tributeRevealedCards[i] == copper || tributeRevealedCards[i] == silver || tributeRevealedCards[i] == gold) { //Treasure cards
             state->coins += 50;
         }
@@ -1364,6 +1366,7 @@ int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer
         }
     }
 
+    discardCard(handPos, currentPlayer, state, 0);
     return 0; 
 }
 
@@ -1377,7 +1380,7 @@ int mineCardEffect(struct gameState *state, int currentPlayer, int choice1, int 
         return -1;
     }
 
-    if (choice2 > treasure_map || choice2 < curse)
+    if (choice2 < copper || choice2 > gold)
     {
         return -1;
     }
