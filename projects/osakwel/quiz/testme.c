@@ -6,13 +6,21 @@
 char inputChar()
 {
     // TODO: rewrite this function
-    return ' ';
+    char randChar = (char)rand() % 256;
+    return randChar;
 }
 
 char *inputString()
 {
     // TODO: rewrite this function
-    return "";
+    char randString[6];
+    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmmnopqrstuvwxyz";
+
+    for (int i = 0; i < 6; i++) {
+        randString[i] = alphabet[rand() % (sizeof(alphabet) - 1)];
+    }
+
+    return randString;
 }
 
 void testme()
