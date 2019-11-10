@@ -13,12 +13,14 @@ char inputChar()
 char *inputString()
 {
     // TODO: rewrite this function
-    char randString[6];
-    char alphabet[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmmnopqrstuvwxyz";
+    char *randString = (char *) malloc(sizeof(char)*6);
+    char alphabet[] = "abcdefghijklmmnopqrstuvwxyz";
 
     for (int i = 0; i < 6; i++) {
         randString[i] = alphabet[rand() % (sizeof(alphabet) - 1)];
     }
+
+    randString[5] = '\0';
 
     return randString;
 }
