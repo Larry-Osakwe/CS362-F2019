@@ -29,3 +29,6 @@ all: playdom player
 
 clean:
 	rm -f *.o playdom.exe playdom player player.exe  *.gcov *.gcda *.gcno *.so *.out testDrawCard testDrawCard.exe
+
+unittestresults:
+	gcc -c unittest1.c -g $(CFLAGS)
