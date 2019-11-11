@@ -37,7 +37,7 @@ int main () {
     testGame.hand[0][1] = copper;
     testGame.hand[0][2] = copper;
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    ambassadorCardEffect(smithy, 2, 0, &test, 0);
+    ambassadorCardEffect(smithy, 2, 0, &testGame, 0);
 
     //Assert coppers removed from hand
     int testGameCoppers = 0;
