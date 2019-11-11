@@ -22,7 +22,7 @@ int main () {
     int seed = 10;
 
     //set your card array
-    int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
+    int k[10] = { adventurer, minion, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
 
     // declare the game states
     struct gameState cleanGame;
@@ -58,7 +58,7 @@ int main () {
     myAssert(testGame.numActions, compareGame.numActions+1);
 
     printf("Results %d hand cards. Expected %d.\n", testGame.handCount[0], 4);
-    assert(testGame.handCount[0], 4);
+    myAssert(testGame.handCount[0], 4);
 
     return 0;
 }
