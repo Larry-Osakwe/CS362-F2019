@@ -8,7 +8,7 @@
 int baronCardEffect (struct gameState *state, int choice1, int player, int handPos);
 int minionCardEffect(struct gameState *state, int handPos, int currentPlayer, int choice1, int choice2);
 int ambassadorCardEffect(int choice1, int choice2, int handPos, struct gameState *state, int currentPlayer);
-int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer, int *tributeRevealedCards);
+int tributeCardEffect(struct gameState *state, int nextPlayer, int currentPlayer, int *tributeRevealedCards, int handPos);
 int mineCardEffect(struct gameState *state, int currentPlayer, int choice1, int choice2, int handPos);
 
 int compare(const void* a, const void* b) {
@@ -908,7 +908,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         return 0;
 
     case tribute:
-        tributeCardEffect(state, nextPlayer, currentPlayer, tributeRevealedCards);
+        tributeCardEffect(state, nextPlayer, currentPlayer, tributeRevealedCards, handPos);
 
     case ambassador:
         ambassadorCardEffect(choice1, choice2, handPos, state, currentPlayer);
