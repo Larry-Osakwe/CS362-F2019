@@ -11,7 +11,7 @@ int NUM_CARDS = 17;
 int NUM_TESTS = 500;
 
 void randomizeGameState(struct gameState *g, int k[10]);
-void baronAssert(struct gameState *base, struct gameState *test, int choice, int k[10], int testNum);
+void minionAssert(struct gameState *base, struct gameState *test, int choice1, int choice2, int k[10], int testNum);
 
 int main() {
 	printf("Random Test Minion Card Effect:\n");
@@ -35,7 +35,7 @@ int main() {
         int choice1 = rand() % 2;
         int choice2 = 1 - choice1;
         minionCardEffect(&testGame, handPos, 0, choice1, choice2);
-        baronAssert(&baseGame, &testGame, choice1, k, i);
+        minionAssert(&base, &test, choice1, choice2, k, i);
     }
 }
 
