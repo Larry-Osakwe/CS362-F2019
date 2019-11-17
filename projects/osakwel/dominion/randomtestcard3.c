@@ -11,7 +11,7 @@ int NUM_CARDS = 17;
 int NUM_TESTS = 500;
 
 void randomizeGameState(struct gameState *g, int k[10]);
-void minionAssert(struct gameState *base, struct gameState *test, int choice1, int choice2, int k[10], int testNum);
+void tributeAssert(struct gameState *base, struct gameState *test, int k[10], int testNum, int revealed[]);
 
 int main() {
 	printf("Random Test Minion Card Effect:\n");
@@ -29,13 +29,12 @@ int main() {
     for (int i = 0; i < NUM_TESTS; i++) {
     	randomizeGameState(&testGame, k);
     	memcpy(&baseGame, &testGame, sizeof(struct gameState));
+    	int revealed[2] = {-1, -1};
     	//Give the player a copy of the baron card to be played
         int handPos = rand() % testGame.handCount[0];
-        testGame.hand[0][handPos] = minion;
-        int choice1 = rand() % 2;
-        int choice2 = 1 - choice1;
-        minionCardEffect(&testGame, handPos, 0, choice1, choice2);
-        minionAssert(&baseGame, &testGame, choice1, choice2, k, i);
+        testGame.hand[0][handPos] = tribute;
+        tributeCardEffect(&testGame, 1, 0, revealed, handPos);
+        tributeAssert(&baseGame, &testGame, k, i, revealed);
     }
 }
 
@@ -91,42 +90,38 @@ void randomizeGameState(struct gameState *g, int k[10]){
     }
 }
 
-void minionAssert(struct gameState *base, struct gameState *test, 
-int choice1, int choice2, int k[10], int testNum){
-    
-    for(int i = 0; i < 27; i++){
-        if(test->supplyCount[i] != base->supplyCount[i]){
-            printf("Failed test %d. Incorrect number of cards in supply.\n", testNum);
-        }
+void tributeAssert(struct gameState *base, struct gameState *test, int k[10], int testNum, int revealed[]){
+    int actions = 0;
+    int coins = 0;
+    int cards = 0;
+    if(revealed[0] == revealed[1]){
+        revealed[1] = -1;
     }
-    
-    if(test->numActions != base->numActions + 1){
+    if(revealed[0] == copper || revealed[0] == silver || revealed[0] == gold){
+        coins += 2;
+    }
+    else if (revealed[0] == estate || revealed[0] == duchy || revealed[0] == province || revealed[0] == gardens || revealed[0] == great_hall){
+        cards += 2;
+    }
+    else if(revealed[0] != -1){
+        actions += 2;
+    }
+    if(revealed[1] == copper || revealed[1] == silver || revealed[1] == gold){
+        coins += 2;
+    }
+    else if (revealed[1] == estate || revealed[1] == duchy || revealed[1] == province || revealed[1] == gardens || revealed[1] == great_hall){
+        cards += 2;
+    }
+    else if(revealed[1] != -1){
+        actions += 2;
+    }
+    if(test->coins != base->coins + coins){
+        printf("Failed test %d. Incorrect number of coins.\n", testNum);
+    }
+    if(test->numActions != base->numActions + actions){
         printf("Failed test %d. Incorrect number of actions.\n", testNum);
     }
-    if(choice1){
-        if(test->coins != base->coins + 2){
-            printf("Failed test %d. Incorrect number of coins.\n", testNum);
-        }
-        if(test->handCount[0] != base->handCount[0] - 1){
-            printf("Failed test %d. Incorrect number of coins.\n", testNum);
-        }
+    if(test->handCount[0] != base->handCount[0] + cards - 1){
+        printf("Failed test %d. Incorrect number of cards.\n", testNum);
     }
-    else if(choice2){
-        if(test->handCount[0] != 4){
-            printf("Failed test %d. Incorrect number of cards in hand.\n", testNum);
-        }
-        for(int j = 1; j < base->numPlayers; j++){
-            if(base->handCount[j] > 4){
-                if(test->handCount[j] != 4){
-                    printf("Failed test %d. Incorrect number of cards in opponent's hand.\n", testNum);
-                }
-            }
-            else{
-                if(test->handCount[j] != base->handCount[j]){
-                    printf("Failed test %d. Incorrect number of cards in opponent's hand.\n", testNum);
-                }
-            }
-        }
-    }
-
 }
