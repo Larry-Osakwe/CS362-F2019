@@ -30,10 +30,10 @@ randomtestcard2: randomtestcard2.c dominion.o rngs.o
 randomtestcard3: randomtestcard3.c dominion.o rngs.o
 	gcc -o randomtestcard3 randomtestcard3.c dominion.o rngs.o $(CFLAGS)
 
-randomtestresults: randomtest1.c randomtest2.c randomtest3.c dominion.o rngs.o
-	gcc -o randomtest1 randomtest1.c dominion.o rngs.o $(CFLAGS)
-	gcc -o randomtest2 randomtest2.c dominion.o rngs.o $(CFLAGS)
-	gcc -o randomtest3 randomtest3.c dominion.o rngs.o $(CFLAGS)
+randomtestresults: randomtestcard1.c randomtestcard2.c randomtestcard3.c dominion.o rngs.o
+	gcc -o randomtestcard1 randomtestcard1.c dominion.o rngs.o $(CFLAGS)
+	gcc -o randomtestcard2 randomtestcard2.c dominion.o rngs.o $(CFLAGS)
+	gcc -o randomtestcard3 randomtestcard3.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard1 >> randomtestresults.out
 	./randomtestcard2 >> randomtestresults.out
 	./randomtestcard3 >> randomtestresults.out
