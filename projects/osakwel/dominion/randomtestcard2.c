@@ -8,7 +8,7 @@
 #include <time.h>
 
 int NUM_CARDS = 17;
-int NUM_TESTS = 500;
+int NUM_TESTS = 1000;
 
 void randomizeGameState(struct gameState *g, int k[10]);
 void minionAssert(struct gameState *base, struct gameState *test, int choice1, int choice2, int k[10], int testNum);

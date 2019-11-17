@@ -8,13 +8,13 @@
 #include <time.h>
 
 int NUM_CARDS = 17;
-int NUM_TESTS = 500;
+int NUM_TESTS = 1000;
 
 void randomizeGameState(struct gameState *g, int k[10]);
 void tributeAssert(struct gameState *base, struct gameState *test, int k[10], int testNum, int revealed[]);
 
 int main() {
-	printf("Random Test Minion Card Effect:\n");
+	printf("Random Test Tribute Card Effect:\n");
 
 	//set your card array
     int k[10] = { adventurer, council_room, feast, gardens, mine, minion, smithy, village, baron, great_hall };
