@@ -30,8 +30,8 @@ int main() {
     	randomizeGameState(&testGame, k);
     	memcpy(&baseGame, &testGame, sizeof(struct gameState));
     	//Give the player a copy of the baron card to be played
-        int handPos = rand() % test.handCount[0];
-        test.hand[0][handPos] = baron;
+        int handPos = rand() % testGame.handCount[0];
+        testGame.hand[0][handPos] = baron;
         int choice1 = rand() % 2;
         baronCardEffect(&testGame, choice1, 0, handPos);
         baronAssert(&baseGame, &testGame, choice1, k, i);
