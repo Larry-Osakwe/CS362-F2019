@@ -10,7 +10,7 @@
 int NUM_CARDS = 17;
 int NUM_TESTS = 1000;
 
-void randomizeGameState(struct gameState *g, int k[10]);
+void randomizeGame(struct gameState *g, int k[10]);
 void tributeAssert(struct gameState *base, struct gameState *test, int k[10], int testNum, int revealed[]);
 
 int main() {
@@ -27,7 +27,7 @@ int main() {
 
 
     for (int i = 0; i < NUM_TESTS; i++) {
-    	randomizeGameState(&testGame, k);
+    	randomizeGame(&testGame, k);
     	memcpy(&baseGame, &testGame, sizeof(struct gameState));
     	int revealed[2] = {-1, -1};
     	//Give the player a copy of the baron card to be played

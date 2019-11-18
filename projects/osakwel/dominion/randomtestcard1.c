@@ -10,7 +10,7 @@
 int NUM_CARDS = 17;
 int NUM_TESTS = 10000;
 
-void randomizeGameState(struct gameState *g, int k[10]);
+void randomizeGame(struct gameState *g, int k[10]);
 void baronAssert(struct gameState *base, struct gameState *test, int choice, int k[10], int testNum);
 
 int main() {

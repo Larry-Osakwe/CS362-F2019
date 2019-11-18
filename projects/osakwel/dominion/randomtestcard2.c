@@ -10,7 +10,7 @@
 int NUM_CARDS = 17;
 int NUM_TESTS = 1000;
 
-void randomizeGameState(struct gameState *g, int k[10]);
+void randomizeGame(struct gameState *g, int k[10]);
 void minionAssert(struct gameState *base, struct gameState *test, int choice1, int choice2, int k[10], int testNum);
 
 int main() {
@@ -25,7 +25,7 @@ int main() {
     struct gameState testGame;
 
     for (int i = 0; i < NUM_TESTS; i++) {
-    	randomizeGameState(&testGame, k);
+    	randomizeGame(&testGame, k);
     	memcpy(&baseGame, &testGame, sizeof(struct gameState));
     	//Give the player a copy of the baron card to be played
         int handPos = rand() % testGame.handCount[0];
