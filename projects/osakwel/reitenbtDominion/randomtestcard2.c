@@ -32,7 +32,7 @@ int main() {
         testGame.hand[0][handPos] = minion;
         int choice1 = rand() % 2;
         int choice2 = 1 - choice1;
-        minionCardEffect(&testGame, handPos, 0, choice1, choice2);
+        cardEffectMinion(handPos, choice1, &testGame);
         minionAssert(&baseGame, &testGame, choice1, choice2, k, i);
     }
 }

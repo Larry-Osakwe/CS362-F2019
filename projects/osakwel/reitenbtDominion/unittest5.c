@@ -37,7 +37,7 @@ int main () {
     testGame.hand[0][0] = mine;
     testGame.hand[0][1] = copper;
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    mineCardEffect(&testGame, 0, 1, silver, 0);
+    cardEffectMine(0, 1, silver, &testGame);
 
     //Assert silver coin was obtained
     int testGameSilvers = 0;

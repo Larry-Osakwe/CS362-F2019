@@ -35,7 +35,7 @@ int main () {
     memcpy(&testGame, &cleanGame, sizeof(struct gameState));
     testGame.hand[0][0] = baron;
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    baronCardEffect(&testGame, 0, 0, 0);
+    cardEffectBaron(0, 0, &testGame);
 
     //Assert number of buys increased by 1
     printf("Results: %d Buys. Expected %d.\n", testGame.numBuys, compareGame.numBuys+1);
@@ -68,7 +68,7 @@ int main () {
     testGame.hand[0][0] = baron;
     testGame.hand[0][1] = estate;
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    baronCardEffect(&testGame, 1, 0, 0);
+    cardEffectBaron(0, 1, &testGame);
 
     //Assert number of buys increased by 1
     printf("Results: %d Buys. Expected %d.\n", testGame.numBuys, compareGame.numBuys+1);

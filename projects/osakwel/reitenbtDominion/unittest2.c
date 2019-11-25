@@ -35,7 +35,7 @@ int main () {
     memcpy(&testGame, &cleanGame, sizeof(struct gameState));
     testGame.hand[0][0] = minion;
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    minionCardEffect(&testGame, 0, 0, 1, 0);
+    cardEffectMinion(0, 0, &testGame);
 
     //Assert number of actions increased by 1
     printf("Results: %d Actions. Expected %d.\n", testGame.numActions, compareGame.numActions+1);
@@ -51,7 +51,7 @@ int main () {
     testGame.hand[0][0] = minion;
 
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    minionCardEffect(&testGame, 0, 0, 0, 1);
+    cardEffectMinion(0, 1, &testGame);
 
     //Assert number of actions increased by 1
     printf("Results: %d Actions. Expected %d.\n", testGame.numActions, compareGame.numActions+1);

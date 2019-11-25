@@ -31,7 +31,7 @@ int main() {
         int handPos = rand() % testGame.handCount[0];
         testGame.hand[0][handPos] = baron;
         int choice1 = rand() % 2;
-        baronCardEffect(&testGame, choice1, 0, handPos);
+        cardEffectBaron(handPos, choice1, &testGame);
         baronAssert(&baseGame, &testGame, choice1, k, i);
     }
 }

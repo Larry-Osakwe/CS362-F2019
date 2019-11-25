@@ -33,7 +33,7 @@ int main() {
     	//Give the player a copy of the baron card to be played
         int handPos = rand() % testGame.handCount[0];
         testGame.hand[0][handPos] = tribute;
-        tributeCardEffect(&testGame, 1, 0, revealed, handPos);
+        cardEffectTribute(handPos, &testGame);
         tributeAssert(&baseGame, &testGame, k, i, revealed);
     }
 }

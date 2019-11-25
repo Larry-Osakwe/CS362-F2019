@@ -39,7 +39,7 @@ int main () {
     testGame.deck[1][0] = copper;
     testGame.deck[1][1] = copper;
     memcpy(&compareGame, &testGame, sizeof(struct gameState));
-    tributeCardEffect(&testGame, 1, 0, tributeRevealedCards, 0);
+    cardEffectTribute(0, &testGame);
 
     //Assert coins increase by 4
     printf("Results: %d coins. Expected %d.\n", testGame.coins, compareGame.coins + 4);
